@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8" />
+<head>
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+<style>
+#map {
+width: 100%;
+height: 600px;
+box-shadow: 5px 5px 5px #888;
+}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+
+var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
++ 'contributors', maxZoom: 18
+});
+
+var map = L.map('map', {
+center: [1.6201816037286574, -75.60988426208498],
+zoom: 15,
+layers: osm,
+scrollWheelZom: true,
+});
+
+/* Craeacion de la ubicacion de la Universidad*/
+var marker = L.marker([ 1.620214, -75.604252],{
+draggable: false,
+title: 'CLICK AQUI'
+}).addTo(map)
+.bindPopup('UNIVERSIDAD DE LA AMAZONIA')
+.openPopup();
+
+/* Craeacion de la ubicacion de La alcaldia de Florencia */
+var marker2 = L.marker([ 1.615107, -75.613809],{
+draggable: false,
+title: 'CLICK AQUI'
+}).addTo(map)
+.bindPopup('ALCALDIA DE FLORENCIA')
+.openPopup();
+
+/* Craeacion de la ubicacion de La plaza Santander */
+var marker3 = L.marker([ 1.614986, -75.613307],{
+draggable: false,
+title: 'CLICK AQUI'
+}).addTo(map)
+.bindPopup('PLAZA SANTANDER')
+.openPopup();
+
+/* Craeacion de la ubicacion de mi Casa */
+var marker4 = L.marker([ 1.6344089, -75.6155692],{
+draggable: false,
+title: 'CLICK AQUI'
+}).addTo(map)
+.bindPopup('MI CASA')
+.openPopup();
+
+/* Creacion del circulo*/
+var circle = L.circle([1.615107, -75.613809], 500, { color: 'black',
+fillColor: '#FF3',
+fillOpacity: 0.5
+}).addTo(map)
+circle.bindPopup("CENTRO DE FLORENCIA ");
+
+/* Creacion de poligono de la plaza santander */
+var polygon = L.polygon([
+[1.6147228020276463, -75.61286687850954],
+[1.6145404842322766, -75.61349987983705],
+[1.615162509584444,  -75.61370372772218],
+[1.6153662764687597, -75.61305999755861]
+]).addTo(map)
+.bindPopup ('PLAZA SANTANDER');
+
+/* punto de la ubicacion de mi casa */
+var point2 = new L.latLng(1.6344089, -75.6155692);
+
+/* punto de la ubicacion de la Universidad */
+var point1 = new L.latLng(1.620214, -75.604252);
+
+/* Creacion de las marcas del mapa */
+var latlngs = [point1, point2];
+
+/* Creacion de la linea */
+var polyline = L.polyline(
+latlngs, {color: 'red'}
+)
+.addTo(map)
+.bindPopup ('MI CASA - UNIVERSIDAD');
+map.doubleClickZoom.disable()
+
+L.control.scale({
+position: 'bottomright',
+imperial: false
+}).addTo(map);
+</script>
+</body>
+</html>
